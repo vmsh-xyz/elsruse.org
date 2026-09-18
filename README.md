@@ -1,5 +1,5 @@
 
->>>> elsruse.org <<<<
+>>>> elsruse.org
 
 >> github.com/vmsh-xyz/elsruse.org
 
