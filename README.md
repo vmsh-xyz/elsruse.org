@@ -1,7 +1,7 @@
 
->>>> elsruse.org
+>>>> https://elsruse.org
 
->> github.com/vmsh-xyz/elsruse.org
+>> https://github.com/vmsh-xyz/elsruse.org
 
 > Catalogue (not a social network, yet)
 
