@@ -3,7 +3,7 @@
 
 >> https://github.com/vmsh-xyz/elsruse.org
 
-> Digital Student Registry – Geo Milev English Language School, Ruse
+> Digital Student Directory – Geo Milev English Language School, Ruse
 
 QUICK:
 1. Create your own static >PAGE< (html/css/javascript)
