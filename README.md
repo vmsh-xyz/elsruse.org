@@ -1,6 +1,9 @@
-elsruse.org
 
-Catalogue (not a social network, yet)
+>>>> elsruse.org <<<<
+
+>> github.com/vmsh-xyz/elsruse.org
+
+> Catalogue (not a social network, yet)
 
 QUICK:
 1. Create your own static >PAGE< (html/css/javascript)
