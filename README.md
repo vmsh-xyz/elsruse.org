@@ -5,7 +5,7 @@
 
 > Digital Student Directory – Geo Milev English Language School, Ruse
 
-QUICK:
+
 1. Create your own static >PAGE< (html/css/javascript)
 2. In order to submit it to the catalogue
    > Create a PR in github
