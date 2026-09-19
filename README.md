@@ -1,9 +1,9 @@
 
->>>> elsruse.org <<<<
+>>>> https://elsruse.org
 
->> github.com/vmsh-xyz/elsruse.org
+>> https://github.com/vmsh-xyz/elsruse.org
 
-> Catalogue (not a social network, yet)
+> Digital Student Directory – Geo Milev English Language School, Ruse
 
 QUICK:
 1. Create your own static >PAGE< (html/css/javascript)
