@@ -33,6 +33,28 @@
             padding: 0;
         }
 
+        /* Персонализиран скролбар (Page Scroller) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(3, 7, 18, 0.8);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(228, 237, 107, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(228, 237, 107, 0.6);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Ysabeau Infant', sans-serif;
             background-color: #030712;
@@ -41,10 +63,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto; /* Позволява скролиране при нужда */
+            padding: 2rem 1rem;
             user-select: none;
             -webkit-user-select: none;
             position: relative;
+        }
+
+        /* Глобални CSS стилове за линкове */
+        a {
+            color: #ffdd38;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease, opacity 0.2s ease;
+        }
+
+        a:hover {
+            color: #e4ed6b;
+            text-shadow: 0 0 8px rgba(228, 237, 107, 0.4);
+        }
+
+        a:focus-visible {
+            outline: 2px dashed #e4ed6b;
+            outline-offset: 4px;
+            border-radius: 4px;
         }
 
         .bg-image {
@@ -57,6 +99,7 @@
             background-position: center;
             background-repeat: no-repeat;
             transition: all 0.7s ease;
+            z-index: 0;
         }
 
         @keyframes subtlePulse {
@@ -99,7 +142,7 @@
         .content-container {
             position: relative;
             z-index: 20;
-            padding: 3rem 1.5rem;
+            padding: 2rem 1.5rem;
             max-width: 32rem;
             width: 100%;
             text-align: center;
@@ -112,7 +155,7 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 45px;
-            padding: 7rem;
+            padding: 5rem 3rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             transition: border-color 0.5s ease;
         }
@@ -187,11 +230,36 @@
             font-size: 0.95rem;
             font-weight: 300;
             line-height: 1.625;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Стилове за връзки вътре в параграфи с описание */
+        .description a {
+            color: #ffffff;
+            font-weight: 500;
+            border-bottom: 1px dashed rgba(255, 221, 56, 0.5);
+            padding-bottom: 2px;
+        }
+
+        .description a:hover {
+            color: #ffdd38;
+            border-bottom-style: solid;
+            border-bottom-color: #ffdd38;
+        }
+
+        .actions-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
         }
 
         .btn-primary {
-            padding: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.25rem;
             border-radius: 3rem;
             background-color: #ffdd38;
             color: #000000;
@@ -200,11 +268,13 @@
             border: none;
             cursor: pointer;
             box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1);
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: background-color 0.2s ease, transform 0.1s ease, color 0.2s ease;
+            text-decoration: none;
         }
 
         .btn-primary:hover {
             background-color: #000000;
+            color: #ffffff;
         }
 
         .btn-primary:active {
@@ -232,11 +302,11 @@
 
         @media (max-width: 768px) {
             .title {
-                font-size: 1.4rem;
+                font-size: 1.8rem;
             }
 
             .glass-card {
-                padding: 4rem;
+                padding: 3rem 1.5rem;
             }
         }
     </style>
@@ -260,25 +330,29 @@
                 📒<br>elsruse.org
             </h1>
 
-            <p class="description">Винаги сред първите!<br>Always among the first!
+            <p class="description">
+                Винаги сред първите!<br>Always among the first!
             </p>
 
-            <button class="btn-primary" id="midiBtn" onclick="toggleMIDI()">
-                🥁
-            </button>
-            <span>&nbsp;&nbsp;&nbsp;</span>
-            <a href="https://elsruse.org/README.md">
-                <button class="btn-primary" id="midiBtn">
-                    ℹ️
+            <div class="actions-group">
+                <button class="btn-primary" id="midiBtn" onclick="toggleMIDI()" title="Пусни / Спри музика">
+                    🥁
                 </button>
-            </a>
-            <br>
-            <br>
-            <br>
-            <br>
-            <p class="description"><a href="https://elsruse.org/class/2003/D/VeronikaDeneva" target="_blank">Вероника Денева<br>Veronika Deneva</a>
+                <a href="https://elsruse.org/README.md" class="btn-primary" id="infoBtn" title="Информация">
+                    ℹ️
+                </a>
+            </div>
+
+            <p class="description">
+                <a href="https://elsruse.org/class/2003/D/VeronikaDeneva" target="_blank" rel="noopener noreferrer">
+                    Вероника Денева<br>Veronika Deneva
+                </a>
             </p>
-            <p class="description"><a href="https://elsruse.org/class/2003/A/vmsh" target="_blank">Виктория Машева<br>Victoria Masheva
+
+            <p class="description">
+                <a href="https://elsruse.org/class/2003/A/vmsh" target="_blank" rel="noopener noreferrer">
+                    Виктория Машева<br>Victoria Masheva
+                </a>
             </p>
         </div>
 
