@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="bg" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вероника Денева - Автор</title>
+    
+    <!-- Google Fonts: Playfair Display, Cormorant Garamond, Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        literary: {
+                            bg: '#0f0b08',
+                            card: '#1a1410',
+                            cardBorder: '#2e231c',
+                            gold: '#dfb260',
+                            goldHover: '#f3ca7e',
+                            muted: '#a39284',
+                            accent: '#8c2d19'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        literary: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    aspectRatio: {
+                        'vertical': '9 / 16',
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s infinite ease-in-out',
+                        'float': 'float 6s infinite ease-in-out',
+                        'shimmer': 'shimmer 2.5s infinite linear',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.6, transform: 'scale(1)' },
+                            '50%': { opacity: 1, transform: 'scale(1.03)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0b08;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e231c;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #dfb260;
+        }
+
+        /* Ambient Glow & Shimmer Background */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fff2d6 0%, #dfb260 50%, #b8860b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-glow {
+            box-shadow: 0 0 25px -5px rgba(223, 178, 96, 0.25);
+        }
+
+        .gold-border-glow:hover {
+            box-shadow: 0 0 35px 0px rgba(223, 178, 96, 0.45);
+        }
+
+        /* Ambient Lighting Canvas overlay */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-[#0f0b08] text-[#e6ded6] font-sans antialiased selection:bg-[#dfb260] selection:text-[#0f0b08] min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Background Animated Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Atmospheric Vignette Gradient Overlay -->
+    <div class="fixed inset-0 bg-radial-gradient pointer-events-none z-0" style="background: radial-gradient(circle at 50% 20%, rgba(42, 28, 20, 0.4) 0%, rgba(15, 11, 8, 0.95) 80%);"></div>
+
+    <div class="relative z-10 flex-grow flex flex-col justify-between max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+
+        <header class="w-full flex justify-center mb-8 sm:mb-12">
+            <!--<div class="inline-flex items-center gap-3 px-4 py-2 sm:px-6 sm:py-2.5 rounded-full bg-literary-card/80 border border-amber-500/30 backdrop-blur-md shadow-lg animate-pulse-glow hover:border-amber-400/60 transition-all duration-300 group">
+                <span class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+                </span>
+                <span class="text-xs sm:text-sm font-medium tracking-wide uppercase text-amber-200/90 group-hover:text-amber-100">
+                    <i class="fa-solid font-light fa-compass-drafting mr-2 text-amber-400"></i>
+                    Страницата е в процес на изграждане
+                </span>
+                <span class="hidden md:inline-block text-xs text-amber-500/60 font-serif italic pl-2 border-l border-amber-500/20">
+                    Очаквайте скоро пълния портал
+                </span>
+            </div>-->
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto">
+
+            <!-- Author Bio & Introduction Header (Left / Top) -->
+            <div class="lg:col-span-7 flex flex-col justify-center text-center lg:text-left space-y-6 sm:space-y-8">
+                
+                <!-- Subtitle / Category -->
+                <div class="inline-flex items-center justify-center lg:justify-start gap-2 text-amber-400/90 text-sm tracking-widest uppercase font-semibold">
+                    <span class="w-8 h-[1px] bg-amber-500/40 hidden sm:inline-block"></span>
+                    <span>Литературен Портфейл</span>
+                    <span class="w-8 h-[1px] bg-amber-500/40"></span>
+                </div>
+
+                <!-- Main Name Header -->
+                <div class="space-y-3">
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold tracking-tight text-white leading-tight">
+                        <span class="gold-gradient-text">Вероника</span> Денева
+                    </h1>
+                    <p class="text-lg sm:text-2xl font-literary italic text-amber-200/80 tracking-wide">
+                        Писател & Автор на проза
+                    </p>
+                </div>
+
+                <div class="relative p-6 sm:p-8 rounded-2xl bg-literary-card/60 border border-literary-cardBorder backdrop-blur-md shadow-xl max-w-2xl mx-auto lg:mx-0">
+                    <i class="fa-solid fa-quote-left text-3xl text-amber-500/20 absolute top-4 left-4"></i>
+                    <p id="quoteText" class="text-base sm:text-lg font-literary italic text-amber-100/90 leading-relaxed relative z-10 transition-opacity duration-500">
+                        "Думите притежават силата да съграждат мостове между сродни души и да събуждат светове, скрити под повърхността на ежедневието."
+                    </p>
+                    <div class="mt-4 flex items-center justify-between text-xs text-amber-400/60 font-sans uppercase tracking-wider">
+                        <span>— Вероника Денева</span>
+                        <button id="nextQuoteBtn" class="hover:text-amber-300 transition-colors flex items-center gap-1.5 focus:outline-none" title="Следващ цитат">
+                            <span>Друг цитат</span>
+                            <i class="fa-solid fa-rotate text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-4 pt-2">
+                    <h2 class="text-xs uppercase tracking-widest text-amber-300/70 font-semibold text-center lg:text-left">
+                        Официални Връзки & Платформи
+                    </h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto lg:mx-0">
+                        
+                        <!-- Official Website Card Link -->
+                        <a href="https://veronikadeneva.com" target="_blank" rel="noopener noreferrer" 
+                           class="group relative flex items-center p-4 rounded-xl bg-gradient-to-r from-literary-card to-[#231a14] border border-amber-500/30 hover:border-amber-400 transition-all duration-300 gold-border-glow hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-black transition-all duration-300 shrink-0">
+                                <i class="fa-solid fa-globe text-xl"></i>
+                            </div>
+                            <div class="ml-4 text-left overflow-hidden">
+                                <div class="text-xs font-medium text-amber-400/80 group-hover:text-amber-300 uppercase tracking-wider">Уебсайт</div>
+                                <div class="text-sm font-semibold text-white truncate group-hover:text-amber-100">veronikadeneva.com</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-xs text-amber-500/50 group-hover:text-amber-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </a>
+
+                        <!-- Amazon Author Page Card Link -->
+                        <a href="https://www.amazon.com/stores/author/B0G4M6C3YK" target="_blank" rel="noopener noreferrer" 
+                           class="group relative flex items-center p-4 rounded-xl bg-gradient-to-r from-literary-card to-[#231a14] border border-amber-500/30 hover:border-amber-400 transition-all duration-300 gold-border-glow hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-black transition-all duration-300 shrink-0">
+                                <i class="fa-brands fa-amazon text-2xl"></i>
+                            </div>
+                            <div class="ml-4 text-left overflow-hidden">
+                                <div class="text-xs font-medium text-amber-400/80 group-hover:text-amber-300 uppercase tracking-wider">Книги в Amazon</div>
+                                <div class="text-sm font-semibold text-white truncate group-hover:text-amber-100">Авторски Профил</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-xs text-amber-500/50 group-hover:text-amber-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="lg:col-span-5 flex flex-col items-center justify-center space-y-4">
+
+                <!-- 9:16 Vertical Player Frame -->
+                <div class="relative w-full max-w-[280px] sm:max-w-[310px] aspect-vertical rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-500/30 group hover:border-amber-400/70 transition-all duration-500 bg-black/80 gold-border-glow">
+                    
+                    <!-- Ambient Glow Behind Player -->
+                    <div class="absolute -inset-1 bg-gradient-to-r from-amber-600 to-amber-900 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200 pointer-events-none"></div>
+
+                    <!-- Embed Iframe Container -->
+                    <div class="relative w-full h-full bg-black flex items-center justify-center">
+                        <iframe 
+                            id="vimeoPlayer"
+                            class="w-full h-full object-cover"
+                            src="https://player.vimeo.com/video/1234541802"
+                            title="Вероника Денева"
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <!-- Dynamic Controls Overlay Bar
+                    <div class="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-center justify-between text-white opacity-90 group-hover:opacity-100 transition-opacity">
+                        <div class="text-xs font-medium truncate pr-2">
+                            <span class="block text-[10px] text-amber-400 uppercase tracking-wider">Интервю</span>
+                            <span>Вероника Денева</span>
+                        </div>
+                        <button id="togglePlayerSize" class="p-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-black transition-all text-xs" title="Пълен екран / Външен преглед">
+                            <i class="fa-solid fa-expand"></i>
+                        </button>
+                    </div>-->
+
+                </div>
+
+                <!-- Direct Vimeo Fallback Button
+                <a href="https://vimeo.com/vmsh/1234541802" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-600/20 border border-sky-500/40 text-sky-300 hover:bg-sky-600 hover:text-white transition-all text-xs font-medium">
+                    <i class="fa-brands fa-vimeo text-base"></i>
+                    <span>Видеото във Vimeo</span>
+                </a>-->
+
+            </div>
+
+        </main>
+
+        <footer class="mt-12 sm:mt-16 pt-6 border-t border-literary-cardBorder/60 text-center space-y-4">
+            <div class="flex items-center justify-center gap-6 text-amber-400/70 text-lg">
+                <a href="https://veronikadeneva.com" target="_blank" class="hover:text-amber-300 transition-colors" title="Официален сайт">
+                    <i class="fa-solid fa-globe"></i>
+                </a>
+                <a href="https://www.amazon.com/stores/author/B0G4M6C3YK" target="_blank" class="hover:text-amber-300 transition-colors" title="Amazon Author Page">
+                    <i class="fa-brands fa-amazon"></i>
+                </a>
+                <a href="https://vimeo.com/1234541802" target="_blank" class="hover:text-amber-300 transition-colors" title="Vimeo Видео">
+                    <i class="fa-brands fa-vimeo"></i>
+                </a>
+            </div>
+            
+            <p class="text-xs text-literary-muted font-literary tracking-wide">
+                &copy; <span id="currentYear"></span> Вероника Денева. Всички права запазени. | Всички книги са достъпни в официалния уебсайт и Амазон.
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /* Set dynamic current year */
+            const yearEl = document.getElementById('currentYear');
+            if (yearEl) {
+                yearEl.textContent = new Date().getFullYear();
+            }
+
+            /* Atmospheric Quotes Logic */
+            const quotes = [
+                '"Думите притежават силата да съграждат мостове между сродни души и да събуждат светове, скрити под повърхността на ежедневието."',
+                '"Всяка история е прозорец към нечие чуждо сърце, през което откриваме частица от себе си."',
+                '"Литературата не е просто бягство от реалността, тя е по-дълбокото ѝ разбиране."',
+                '"Истинското изкуство се ражда в тишината между мислите и смелостта да ги споделиш."'
+            ];
+            let currentQuoteIndex = 0;
+
+            const quoteText = document.getElementById('quoteText');
+            const nextQuoteBtn = document.getElementById('nextQuoteBtn');
+
+            if (nextQuoteBtn && quoteText) {
+                nextQuoteBtn.addEventListener('click', () => {
+                    quoteText.style.opacity = '0';
+                    setTimeout(() => {
+                        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+                        quoteText.textContent = quotes[currentQuoteIndex];
+                        quoteText.style.opacity = '1';
+                    }, 300);
+                });
+            }
+
+            /* Toggle Fullscreen Vimeo Video */
+            const toggleBtn = document.getElementById('togglePlayerSize');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    const iframe = document.getElementById('vimeoPlayer');
+                    if (iframe && iframe.requestFullscreen) {
+                        iframe.requestFullscreen();
+                    } else if (iframe && iframe.webkitRequestFullscreen) {
+                        iframe.webkitRequestFullscreen();
+                    } else {
+                        window.open('https://vimeo.com/1234541802', '_blank');
+                    }
+                });
+            }
+
+            /* Particle Canvas Visual Engine (Warm Ember Particle Effect) */
+            const canvas = document.getElementById('particleCanvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+
+                let width = canvas.width = window.innerWidth;
+                let height = canvas.height = window.innerHeight;
+
+                window.addEventListener('resize', () => {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                });
+
+                class Particle {
+                    constructor() {
+                        this.reset();
+                    }
+
+                    reset() {
+                        this.x = Math.random() * width;
+                        this.y = height + Math.random() * 50;
+                        this.size = Math.random() * 2 + 0.5;
+                        this.speedY = Math.random() * 0.6 + 0.2;
+                        this.speedX = (Math.random() - 0.5) * 0.3;
+                        this.opacity = Math.random() * 0.5 + 0.2;
+                        this.fade = Math.random() * 0.003 + 0.001;
+                    }
+
+                    update() {
+                        this.y -= this.speedY;
+                        this.x += this.speedX;
+                        this.opacity -= this.fade;
+
+                        if (this.y < -10 || this.opacity <= 0) {
+                            this.reset();
+                        }
+                    }
+
+                    draw() {
+                        ctx.fillStyle = `rgba(223, 178, 96, ${this.opacity})`;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                const particles = Array.from({ length: 45 }, () => new Particle());
+
+                function animateParticles() {
+                    ctx.clearRect(0, 0, width, height);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+                    requestAnimationFrame(animateParticles);
+                }
+
+                animateParticles();
+            }
+        });
+    </script>
+</body>
+</html>
